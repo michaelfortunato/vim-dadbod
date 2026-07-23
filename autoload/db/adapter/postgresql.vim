@@ -8,9 +8,13 @@ function! db#adapter#postgresql#canonicalize(url) abort
         \ 'dbname': 'database'})
 endfunction
 
+function! s:psql() abort
+  return get(g:, 'db_adapter_postgresql_psql', executable('psql-18') ? 'psql-18' : 'psql')
+endfunction
+
 function! db#adapter#postgresql#interactive(url, ...) abort
   let short = matchstr(a:url, '^[^:]*:\%(///\)\=\zs[^/?#]*$')
-  return ['psql', '-w'] + (a:0 ? a:1 : []) + ['--dbname', len(short) ? short : a:url]
+  return [s:psql(), '-w'] + (a:0 ? a:1 : []) + ['--dbname', len(short) ? short : a:url]
 endfunction
 
 function! db#adapter#postgresql#filter(url) abort
@@ -32,7 +36,7 @@ function! s:parse_columns(output, ...) abort
 endfunction
 
 function! db#adapter#postgresql#complete_database(url) abort
-  let cmd = ['psql', '--no-psqlrc', '-wltAX', substitute(a:url, '/[^/]*$', '/postgres', '')]
+  let cmd = [s:psql(), '--no-psqlrc', '-wltAX', substitute(a:url, '/[^/]*$', '/postgres', '')]
   return s:parse_columns(db#systemlist(cmd), 0)
 endfunction
 
