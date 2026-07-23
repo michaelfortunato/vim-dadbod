@@ -1,0 +1,19 @@
+autoload/db/adapter/postgresql.vim
+  s_f7ac878be9bae6::t_2ccee0b34272e7 11-14,17,39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "0baa4f4528039a013bedd114ccc2bfdc80b47a45",
+  "prompts": {},
+  "sessions": {
+    "s_f7ac878be9bae6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f49a1-ec7a-71f0-a826-74b1eb780152",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Michael Fortunato <michael.n.fortunato@gmail.com>"
+    }
+  }
+}
